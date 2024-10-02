@@ -9,7 +9,7 @@ Copy code
 ## About Me
 
 Hello! I'm Shakti Singh, a passionate engineering student with a strong interest in programming and software development.
-- 🌱 I’m currently learning and focusing on improving my skills in **C programming**, **Java** 
+- 🌱 I’m currently learning and focusing on improving my skills in **C programming**, **Java** .
 - 👀 I’m interested in ... software development and web designing and game development.
 - 💞️ I’m looking to collaborate on ... google
 - 📫 How to reach me ...
