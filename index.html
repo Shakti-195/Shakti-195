@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streak Tracker</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 300;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .streaks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .streak-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .streak-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .streak-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 400% 400%;
+            animation: gradientShift 3s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .streak-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .streak-count {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+
+        .streak-unit {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #ecf0f1;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            border-radius: 4px;
+            transition: width 0.8s ease;
+        }
+
+        .streak-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .streak-actions {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            flex: 1;
+        }
+
+        .btn-primary {
+            background: #3498db;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+
+        .btn-secondary:hover {
+            background: #bdc3c7;
+        }
+
+        .stats-section {
+            padding: 30px;
+            background: #f8f9fa;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #3498db;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .streaks-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .streak-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Streak Tracker</h1>
+            <p class="subtitle">Keep your habits going strong!</p>
+        </header>
+
+        <div class="streaks-grid">
+            <div class="streak-card">
+                <div class="streak-title">Daily Exercise</div>
+                <div class="streak-count">12</div>
+                <div class="streak-unit">days in a row</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 60%;"></div>
+                </div>
+                <div class="streak-info">
+                    <span>Goal: 30 days</span>
+                    <span>12/30</span>
+                </div>
+                <div class="streak-actions">
+                    <button class="btn btn-primary" onclick="incrementStreak(this)">+1 Day</button>
+                    <button class="btn btn-secondary" onclick="resetStreak(this)">Reset</button>
+                </div>
+            </div>
+
+            <div class="streak-card">
+                <div class="streak-title">Reading</div>
+                <div class="streak-count">8</div>
+                <div class="streak-unit">days in a row</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 40%;"></div>
+                </div>
+                <div class="streak-info">
+                    <span>Goal: 20 days</span>
+                    <span>8/20</span>
+                </div>
+                <div class="streak-actions">
+                    <button class="btn btn-primary" onclick="incrementStreak(this)">+1 Day</button>
+                    <button class="btn btn-secondary" onclick="resetStreak(this)">Reset</button>
+                </div>
+            </div>
+
+            <div class="streak-card">
+                <div class="streak-title">Meditation</div>
+                <div class="streak-count">25</div>
+                <div class="streak-unit">days in a row</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 83%;"></div>
+                </div>
+                <div class="streak-info">
+                    <span>Goal: 30 days</span>
+                    <span>25/30</span>
+                </div>
+                <div class="streak-actions">
+                    <button class="btn btn-primary" onclick="incrementStreak(this)">+1 Day</button>
+                    <button class="btn btn-secondary" onclick="resetStreak(this)">Reset</button>
+                </div>
+            </div>
+
+            <div class="streak-card">
+                <div class="streak-title">Coding Practice</div>
+                <div class="streak-count">5</div>
+                <div class="streak-unit">days in a row</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 25%;"></div>
+                </div>
+                <div class="streak-info">
+                    <span>Goal: 20 days</span>
+                    <span>5/20</span>
+                </div>
+                <div class="streak-actions">
+                    <button class="btn btn-primary" onclick="incrementStreak(this)">+1 Day</button>
+                    <button class="btn btn-secondary" onclick="resetStreak(this)">Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">50</div>
+                    <div class="stat-label">Total Days</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Active Streaks</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">85%</div>
+                    <div class="stat-label">Success Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">12</div>
+                    <div class="stat-label">Longest Streak</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function incrementStreak(button) {
+            const card = button.closest('.streak-card');
+            const countElement = card.querySelector('.streak-count');
+            const progressFill = card.querySelector('.progress-fill');
+            const infoElement = card.querySelector('.streak-info span:last-child');
+
+            let currentCount = parseInt(countElement.textContent);
+            currentCount++;
+            countElement.textContent = currentCount;
+
+            // Update progress (assuming goal is in the info)
+            const goalText = card.querySelector('.streak-info span:first-child').textContent;
+            const goal = parseInt(goalText.split(': ')[1]);
+            const progress = Math.min((currentCount / goal) * 100, 100);
+            progressFill.style.width = progress + '%';
+
+            infoElement.textContent = currentCount + '/' + goal;
+
+            // Animate the count
+            countElement.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                countElement.style.transform = 'scale(1)';
+            }, 200);
+        }
+
+        function resetStreak(button) {
+            const card = button.closest('.streak-card');
+            const countElement = card.querySelector('.streak-count');
+            const progressFill = card.querySelector('.progress-fill');
+            const infoElement = card.querySelector('.streak-info span:last-child');
+
+            countElement.textContent = '0';
+            progressFill.style.width = '0%';
+            infoElement.textContent = '0/' + infoElement.textContent.split('/')[1];
+
+            // Animate reset
+            card.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                card.style.transform = 'scale(1)';
+            }, 200);
+        }
+    </script>
+</body>
+</html>
