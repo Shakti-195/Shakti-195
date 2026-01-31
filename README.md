@@ -1,9 +1,5 @@
 - 👋 
-Memory updated
-Here's a sample README.md file for your GitHub profile:
 
-markdown
-Copy code
 # Welcome to Shakti Singh's GitHub Profile! 👋
 
 ## About Me
