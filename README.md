@@ -34,7 +34,24 @@ Python
 ### [Algorithm_lab_practical](https://github.com/Shakti-195/Algorithm_lab_practical) 
 C programming questions  
 C
+### [C-programming-](https://github.com/Shakti-195/C-programming-) 
+![Stars](https://img.shields.io/github/stars/Shakti-195/C-programming-?style=flat-square) C
 
+### [Python-with-CODEWITHHARRY](https://github.com/Shakti-195/Python-with-CODEWITHHARRY) 
+Python core  
+Python
+
+### [VastuAi](https://github.com/Shakti-195/VastuAi) 
+Mini project  
+JavaScript
+
+### [Snake-Game](https://github.com/Shakti-195/Snake-Game) 
+Html/css/javascript  
+JavaScript
+
+### [HTML](https://github.com/Shakti-195/HTML) 
+Just Exploring the Html and working for Frontend  
+![Stars](https://img.shields.io/github/stars/Shakti-195/HTML?style=flat-square) HTML
 ## �📊 GitHub Stats:
 
 ![](https://github-readme-stats.vercel.app/api?username=Shakti-195&theme=dark&hide_border=false&include_all_commits=false&count_private=false)<br/>
