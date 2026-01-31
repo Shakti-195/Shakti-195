@@ -1,17 +1,10 @@
 # 💫 About Me:
 
-BTech student | Passionate about coding and technology | Exploring new frameworks and building innovative projects.
+BTech student | Learning Artificial Intelligence & Blockchain | Interested in building real-world projects and exploring new technologies.
 
 ## 🌐 Socials:
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile) [![Email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:your.email@example.com)
-
-## 🚀 Featured Project
-
-### Streak Tracker UI
-A modern, streaks-inspired habit tracking interface with clean cards, smooth animations, and minimal colors.
-
-[![View Demo](https://img.shields.io/badge/View%20Demo-000000?style=for-the-badge&logo=github&logoColor=white)](https://shakti-195.github.io/)
 
 ## 💻 Tech Stack:
 
